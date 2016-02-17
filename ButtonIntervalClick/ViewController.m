@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "UIControl+IntervalClick.h"
 
 @interface ViewController ()
 
@@ -17,6 +18,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+}
+- (IBAction)commonClick:(id)sender {
+    
+    NSLog(@"common按钮被点击了");
+}
+- (IBAction)runtimeClick:(id)sender {
+    NSLog(@"runtime按钮被点击了");
 }
 
 - (void)didReceiveMemoryWarning {

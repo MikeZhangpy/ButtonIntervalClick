@@ -15,6 +15,7 @@
 		07573C3B1C731926004F29CD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07573C391C731926004F29CD /* LaunchScreen.storyboard */; };
 		07573C461C731927004F29CD /* ButtonIntervalClickTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 07573C451C731927004F29CD /* ButtonIntervalClickTests.m */; };
 		07573C511C731927004F29CD /* ButtonIntervalClickUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 07573C501C731927004F29CD /* ButtonIntervalClickUITests.m */; };
+		07573C611C731AE1004F29CD /* UIControl+IntervalClick.m in Sources */ = {isa = PBXBuildFile; fileRef = 07573C601C731AE1004F29CD /* UIControl+IntervalClick.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,8 @@
 		07573C4C1C731927004F29CD /* ButtonIntervalClickUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ButtonIntervalClickUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		07573C501C731927004F29CD /* ButtonIntervalClickUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ButtonIntervalClickUITests.m; sourceTree = "<group>"; };
 		07573C521C731927004F29CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		07573C5F1C731AE1004F29CD /* UIControl+IntervalClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIControl+IntervalClick.h"; sourceTree = "<group>"; };
+		07573C601C731AE1004F29CD /* UIControl+IntervalClick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIControl+IntervalClick.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +104,7 @@
 		07573C2A1C731926004F29CD /* ButtonIntervalClick */ = {
 			isa = PBXGroup;
 			children = (
+				07573C5E1C731ACC004F29CD /* ButtonExtension */,
 				07573C2E1C731926004F29CD /* AppDelegate.h */,
 				07573C2F1C731926004F29CD /* AppDelegate.m */,
 				07573C311C731926004F29CD /* ViewController.h */,
@@ -138,6 +142,15 @@
 				07573C521C731927004F29CD /* Info.plist */,
 			);
 			path = ButtonIntervalClickUITests;
+			sourceTree = "<group>";
+		};
+		07573C5E1C731ACC004F29CD /* ButtonExtension */ = {
+			isa = PBXGroup;
+			children = (
+				07573C5F1C731AE1004F29CD /* UIControl+IntervalClick.h */,
+				07573C601C731AE1004F29CD /* UIControl+IntervalClick.m */,
+			);
+			path = ButtonExtension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -271,6 +284,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				07573C331C731926004F29CD /* ViewController.m in Sources */,
+				07573C611C731AE1004F29CD /* UIControl+IntervalClick.m in Sources */,
 				07573C301C731926004F29CD /* AppDelegate.m in Sources */,
 				07573C2D1C731926004F29CD /* main.m in Sources */,
 			);
@@ -496,6 +510,7 @@
 				07573C571C731927004F29CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		07573C581C731927004F29CD /* Build configuration list for PBXNativeTarget "ButtonIntervalClickTests" */ = {
 			isa = XCConfigurationList;
@@ -504,6 +519,7 @@
 				07573C5A1C731927004F29CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		07573C5B1C731927004F29CD /* Build configuration list for PBXNativeTarget "ButtonIntervalClickUITests" */ = {
 			isa = XCConfigurationList;
@@ -512,6 +528,7 @@
 				07573C5D1C731927004F29CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
