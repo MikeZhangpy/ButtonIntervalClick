@@ -11,23 +11,40 @@
 
 static const char *UIControl_acceptEventInterval = "UIControl_acceptEventInterval";
 
+static const char *UIControl_acceptedEventTime = "UIControl_acceptedEventTime";
+
 @implementation UIControl (IntervalClick)
 
 +(void)load
 {
-    Method a = class_getInstanceMethod(self, @selector(sendAction:to:forEvent:));
-    Method b = class_getInstanceMethod(self, @selector(__py_sendAction:to:forEvent:));
-    method_exchangeImplementations(a, b);
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [self swizzleSelector:@selector(sendAction:to:forEvent:)
+         withSwizzledSelector:@selector(__py_sendAction:to:forEvent:)];
+    });
+}
+
+- (NSTimeInterval)py_acceptedEventTime
+{
+    return [objc_getAssociatedObject(self, UIControl_acceptedEventTime) doubleValue];
+}
+
+- (void)setPy_acceptedEventTime:(NSTimeInterval)uxy_acceptedEventTime
+{
+    objc_setAssociatedObject(self, UIControl_acceptedEventTime, @(uxy_acceptedEventTime), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (void)__py_sendAction:(SEL)action to:(id)target forEvent:(UIEvent *)event
 {
-//    if (self.uxy_ignoreEvent) return;
+    
+    
+    if (NSDate.date.timeIntervalSince1970 - self.py_acceptedEventTime < self.py_eventInterval) return;
+    
     if (self.py_eventInterval > 0)
     {
-//        self.uxy_ignoreEvent = YES;
-        [self performSelector:@selector(setUxy_ignoreEvent:) withObject:@(NO) afterDelay:self.py_eventInterval];
+        self.py_acceptedEventTime = NSDate.date.timeIntervalSince1970;
     }
+    
     [self __py_sendAction:action to:target forEvent:event];
 }
 
@@ -40,6 +57,30 @@ static const char *UIControl_acceptEventInterval = "UIControl_acceptEventInterva
 -(void)setPy_eventInterval:(NSTimeInterval)py_eventInterval
 {
     objc_setAssociatedObject(self, UIControl_acceptEventInterval, @(py_eventInterval), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+// 全面
++ (void)swizzleSelector:(SEL)originalSelector withSwizzledSelector:(SEL)swizzledSelector {
+    Class class = [self class];
+    
+    Method originalMethod = class_getInstanceMethod(class, originalSelector);
+    Method swizzledMethod = class_getInstanceMethod(class, swizzledSelector);
+    
+    // 若已经存在，则添加会失败
+    BOOL didAddMethod = class_addMethod(class,
+                                        originalSelector,
+                                        method_getImplementation(swizzledMethod),
+                                        method_getTypeEncoding(swizzledMethod));
+    
+    // 若原来的方法并不存在，则添加即可
+    if (didAddMethod) {
+        class_replaceMethod(class,
+                            swizzledSelector,
+                            method_getImplementation(originalMethod),
+                            method_getTypeEncoding(originalMethod));
+    } else {
+        method_exchangeImplementations(originalMethod, swizzledMethod);
+    }
 }
 
 

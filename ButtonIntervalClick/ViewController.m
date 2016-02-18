@@ -10,6 +10,7 @@
 #import "UIControl+IntervalClick.h"
 
 @interface ViewController ()
+@property (weak, nonatomic) IBOutlet UIButton *runtimeBtn;
 
 @end
 
@@ -17,6 +18,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.runtimeBtn.py_eventInterval = 1;
+    
     // Do any additional setup after loading the view, typically from a nib.
 }
 - (IBAction)commonClick:(id)sender {
